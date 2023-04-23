@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/upload", methods=["POST"])
+@app.route("/api/upload", methods=["POST"])
 def generate_index():
     file = request.files["file"]
     filename = file.filename
@@ -30,7 +30,7 @@ def generate_index():
 
     return result
 
-@app.route("/pull-out", methods=["POST"])
+@app.route("/api/pull-out", methods=["POST"])
 def pull_out_by_index():
     request_json = request.json
     index = request_json['index']
@@ -47,6 +47,10 @@ def pull_out_by_index():
 
     return result
 
+@app.route("/api", methods=["GET"])
+def sample():
+    return "hello"
+
 def transcript_file(filename):
     openai.api_key = os.environ['OPENAI_API_KEY']
     filename = open(filename, "rb")
@@ -54,4 +58,4 @@ def transcript_file(filename):
     return transcript['text']
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", debug=False)

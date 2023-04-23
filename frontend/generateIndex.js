@@ -5,7 +5,7 @@ async function uploadFile() {
     
 	formData.append("file", file);
     
-	const response = await fetch("http://127.0.0.1:5000/upload", {
+	const response = await fetch(`https://arcanaidora.com/api/upload`, {
         method: "POST",
 		body: formData,
 	});
@@ -90,7 +90,7 @@ async function putIndex(index){
     data = {'index': index, 'text': text};
     console.log(data);
     
-    const response = await fetch("http://127.0.0.1:5000/pull-out", {
+    const response = await fetch("https://arcanaidora.com/api/pull-out", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
